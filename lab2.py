@@ -24,16 +24,18 @@ group2 = forest[10:20]
 group3 = forest[20:]
 
 # Гистограммы
-plt.hist(forest, bins=10)
+plt.hist([x / 1_000_000 for x in forest], bins=30, label="Площадь лесов")
 plt.title("Распределение площади лесов по странам")
-plt.xlabel("Площадь лесов (га)")
+plt.xlabel("Площадь лесов (млн. га)")
 plt.ylabel("Количество стран")
+plt.legend()
 plt.show()
 
-plt.hist(area, bins=10)
+plt.hist([x / 1_000_000 for x in area], bins=30, label="Площадь стран")
 plt.title("Распределение площади стран")
-plt.xlabel("Площадь стран (га)")
+plt.xlabel("Площадь стран (млн. га)")
 plt.ylabel("Количество стран")
+plt.legend()
 plt.show()
 
 # Шапиро–Уилка
