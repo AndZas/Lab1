@@ -203,6 +203,43 @@ plt.legend()
 plt.grid(True)
 plt.show()
 
+# Полиномиальный тренд 2 степени
+coeffs_poly = np.polyfit(df.index, df['Площадь лесов'], 2)
+poly_model = np.poly1d(coeffs_poly)
+
+df['Poly_Trend'] = poly_model(df.index)
+
+# Оценка полиномиальной модели
+r2_poly = r2_score(df['Площадь лесов'], df['Poly_Trend'])
+rmse_poly = np.sqrt(mean_squared_error(df['Площадь лесов'], df['Poly_Trend']))
+
+print("\nПараметры полиномиального тренда:")
+print(coeffs_poly)
+
+print("\nОценка полиномиальной модели:")
+print("R^2:", r2_poly)
+print("RMSE:", rmse_poly)
+
+# График сравнения трендов
+plt.figure(figsize=(12, 6))
+
+plt.plot(df.index, df['Площадь лесов'],
+         label='Исходные данные')
+
+plt.plot(df.index, trend,
+         label='Линейный тренд')
+
+plt.plot(df.index, df['Poly_Trend'],
+         label='Полиномиальный тренд')
+
+plt.xlabel('Год')
+plt.ylabel('Площадь лесов, тыс. га')
+plt.title('Сравнение моделей тренда')
+plt.legend()
+plt.grid(True)
+
+plt.show()
+
 
 # ОСТАТОЧНАЯ КОМПОНЕНТА
 residuals = y - trend
